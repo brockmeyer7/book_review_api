@@ -14,13 +14,12 @@ def authors():
         return jsonify(result)
 
     if request.method == 'POST':
-        if 'first_name' not in request.json or 'last_name' not in request.json:
+        if 'first_name' not in request.json or 'last_name' not in request.json or 'birthdate' not in request.json:
             return abort(400)
 
-        a = Author(request.json['first_name'], request.json['last_name'])
+        a = Author(request.json['first_name'], request.json['last_name'],
+                   birthdate=request.json['birthdate'])
 
-        if 'birthdate' in request.json:
-            a.birthdate = request.json['birthdate']
         if 'website' in request.json:
             a.website = request.json['website']
 
@@ -51,11 +50,11 @@ def specified_author(id: int):
         if 'first_name' in request.json:
             a.first_name = request.json['first_name']
         if 'last_name' in request.json:
-            a.first_name = request.json['last_name']
+            a.last_name = request.json['last_name']
         if 'birthdate' in request.json:
-            a.first_name = request.json['birthdate']
+            a.birthdate = request.json['birthdate']
         if 'website' in request.json:
-            a.first_name = request.json['website']
+            a.website = request.json['website']
 
         try:
             db.session.commit()
