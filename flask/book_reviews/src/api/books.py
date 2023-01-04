@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, abort, request
-from ..models import Book, Author, Genre, Award, db
+from ..models import Book, Author, Genre, Award, Rating, db
 
 bp = Blueprint('books', __name__, url_prefix='/books')
 
@@ -59,8 +59,13 @@ def books():
 
 @bp.route('/<int:id>/avg_rating', methods=['GET'])
 def average(id: int):
-    result = {"average": average}
-    return jsonify(True)
+    try:
+        average = db.session.query(
+            db.func.avg(Rating.rating)).filter(Rating.book_id == id).scalar()
+        result = float(average)
+        return jsonify(result)
+    except:
+        return jsonify(False)
 
 
 @ bp.route('/<int:id>/ratings', methods=['GET'])
