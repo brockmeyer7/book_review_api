@@ -139,12 +139,3 @@
   Requires: 'title' must be included in the request in JSON format.
 - DELETE
   Deletes specified series from database
-
-## Retrospective
-
-1. How did the project's design evolve over time?
-   - I had to scale back from my original ER digaram. It took a lot more work to implement each endpoint than I thought it was going to take.
-2. Did you choose to use an ORM or raw SQL?
-   - I used an ORM to create the queries for the project. However, in a couple spots I used raw SQL as it was easier to fine tune the query exactly how I wanted it to be.
-3. What future improvements are in store if any?
-   - I have not finished all of the endpoints for the project, so I still need to do that to fully complete it.
